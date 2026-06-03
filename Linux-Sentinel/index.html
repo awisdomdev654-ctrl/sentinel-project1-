@@ -1,49 +1,41 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Security Sentinel</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Sentinel Telemetry Dashboard</title>
+    <!-- Link to our clean external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="status-card" class="card">
-        <h1>System Health</h1>
-        <p>Current Status: <strong id="status">Checking...</strong></p>
-        <p>Last Scan: <span id="time"></span></p>
-        <div id="alerts"></div>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>🛡️ Linux Sentinel Dashboard</h1>
+            <p>Real-Time Network Telemetry & System Monitoring</p>
+        </header>
+
+        <!-- This is the card container your JS targets to change classes -->
+        <div id="status-card" class="card secure">
+            <h2>System State</h2>
+            <!-- Your JS updates this innerText based on JSON 'status' -->
+            <div id="status" class="status-display">Checking System...</div>
+            <p class="timestamp">Last Scan Runtime: <span id="time">00:00:00</span></p>
+        </div>
+
+        <div class="terminal-log">
+            <h3>Live Telemetry Feed Summary</h3>
+            <p>The Python core engine is active and writing system socket metrics locally to data payloads. Input validation guardrails are fully active.</p>
+        </div>
     </div>
 
+    <!-- Wire up your custom interactive DOM code -->
+    <script src="index-sentinel.js"></script>
     <script>
-        // Replace your existing <script> with this:
-async function getSecurityData() {
-    try {
-        // FETCH: Grabbing the data Python just exported
-        const response = await fetch('security_data.json');
-        const data = await response.json();
-
-        // DOM SELECTION
-        const statusText = document.getElementById('status');
-        const timeText = document.getElementById('time');
-        const card = document.getElementById('status-card');
-
-        // UPDATING THE CONTENT
-        statusText.innerText = data.status;
-        timeText.innerText = data.last_scan;
-        
-        // LOGIC SMASH: CSS + DOM + PYTHON DATA
-        if (data.status === "Warning") {
-            card.className = "card warning"; // Triggers the red flashing animation
-        } else {
-            card.className = "card secure";  // Stays green
-        }
-    } catch (error) {
-        console.log("Waiting for Python Sentinel to generate data...");
-    }
-}
-
-// Check every 5 seconds
-setInterval(getSecurityData, 5000);
+        // Dynamically kick off your function and loop it every 5 seconds 
+        // so the page updates in real-time while your python script runs!
+        getSecurityData();
+        setInterval(getSecurityData, 5000);
     </script>
 </body>
 </html>
-
