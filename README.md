@@ -4,7 +4,7 @@ A full-stack, real-time DevSecOps telemetry system that monitors active system c
 
 ## 🎥 Live Demo
 
-👉 **[Click Here to Watch the Full-Stack Telemetry & State Transition Demo on YouTube]([https://youtu.be/PuseKxssnQo](https://www.youtube.com/watch?v=PuseKxssnQo))**
+(https://youtu.be/PuseKxssnQo)**
 
 *Note: The system dashboard dynamically shifts from a secure cockpit to an active warning state in under 5 seconds when the backend automation engine flags unverified socket activity.*
 
